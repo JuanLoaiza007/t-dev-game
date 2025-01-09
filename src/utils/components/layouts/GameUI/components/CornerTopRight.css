@@ -2,10 +2,21 @@
 
 .container-top-right {
   position: absolute;
+  text-align: right;
   top: 20px;
   right: 20px;
-  background-color: #ffffff;
   padding: 10px;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
+  user-select: none;
+}
+
+.life-label {
+  font-size: 2rem;
+  text-shadow: 1px 1px 10px #00000046;
+}
+
+.diamond-count {
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 10px #00000075;
+  font-weight: bold;
+  color: white;
 }

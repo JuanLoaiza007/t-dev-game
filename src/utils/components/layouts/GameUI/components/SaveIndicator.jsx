@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSavingState } from '../states/SavingState'
 import './SaveIndicator.css'
 
@@ -15,11 +15,16 @@ const createSaveIndicator = () => {
 
   return (
     <div className='container-bottom-left'>
-      {savingState.isSaving &&
+      {savingState.isSaving && (
         <>
-          <img className='save-image' src='/assets/images/icons/pata.png' alt='loading' />
-          <p className='save-text'>Saving...</p>
-        </>}
+          <img
+            className='save-image'
+            src='/assets/images/icons/pata.png'
+            alt='loading'
+          />
+          <p className='save-text'>Guardando...</p>
+        </>
+      )}
     </div>
   )
 }

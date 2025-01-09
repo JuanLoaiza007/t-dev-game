@@ -1,21 +1,24 @@
-// [CornerTopRight.jsx]
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './CornerTopRight.css'
-import { useLifeState } from '../../../controller/CharacterLife'
-import { useCollectablesState } from '../../../controller/CharacterCollectables'
+import { usePlayer } from '../../../../../context/PlayerContext'
 
-const CornerTopRight = ({ life, playerName }) => {
-  const displayLife = useLifeState()
-  const diamondsCount = useCollectablesState()
-  const displayPlayerName = playerName ?? 'undefined'
+const CornerTopRight = () => {
+  const { player } = usePlayer()
+  const [vida, setVida] = useState('')
+
+  useEffect(() => {
+    const updatedVida = Array(player.lives).fill('❤️').join('')
+    setVida(updatedVida)
+  }, [player.lives])
 
   return (
     <div className='container-top-right'>
-      <div className='object'>[]</div>
-      <div className='player-name'>Nombre: {displayPlayerName}</div>
-      <div className='life-label'>Vida: {displayLife.value}</div>
-      <div className='life-bar' style={{ width: `${displayLife}%` }} />
-      <div className='diamond-count'>Diamantes: {diamondsCount.value}</div>
+      <div className='life-label'>{vida}</div>
+      <div
+        className='life-bar'
+        style={{ width: `${(player.lives / 3) * 100}%` }}
+      />
+      <div className='diamond-count'>💎 x {player.diamondsCollected}</div>
     </div>
   )
 }
