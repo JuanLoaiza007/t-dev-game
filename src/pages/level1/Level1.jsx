@@ -35,7 +35,7 @@ import { usePlayer } from '../../context/PlayerContext'
 
 const debug = process.env.REACT_APP_ENVIRONMENT !== 'production'
 
-export default function Level1() {
+export default function Level1 () {
   const map = useMovements()
   const lifeState = useLifeState()
   const positionState = useCharacterPositionState()
@@ -71,6 +71,7 @@ export default function Level1() {
         currentPosition: [0, 0, 0]
       }))
     }
+    guardarEnLocalStorage('player', player)
   }, [player.currentLevel, lifeState.value, setPlayer])
 
   const renderAvatar = () => (

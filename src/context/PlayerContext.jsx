@@ -13,7 +13,7 @@ export const usePlayer = () => {
   return context
 }
 
-export function PlayerProvider({ children }) {
+export function PlayerProvider ({ children }) {
   const { value: life } = useLifeState()
   const { value: diamonds } = useCollectablesState()
   const [player, setPlayer] = useState({
