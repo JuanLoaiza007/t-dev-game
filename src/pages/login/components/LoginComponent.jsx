@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-export default function LoginComponent() {
+export default function LoginComponent () {
   const navigate = useNavigate()
 
   return (

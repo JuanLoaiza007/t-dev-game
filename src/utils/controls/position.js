@@ -1,4 +1,4 @@
-export function isPositionInCheckpoints(position, checkpointsData) {
+export function isPositionInCheckpoints (position, checkpointsData) {
   if (!checkpointsData || !checkpointsData.checkpoints) {
     console.error('No se encontraron checkpoints en el JSON.')
     return false

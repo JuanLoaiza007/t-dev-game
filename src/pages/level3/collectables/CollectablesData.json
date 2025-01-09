@@ -1,0 +1,96 @@
+{
+    "collectables": [
+      {
+        "id": "0",
+        "name": "DiamondCone 1",
+        "position": [-19, 0.5, -10],
+        "isTaken": false,
+        "isCollected": false
+      },
+      {
+        "id": "1",
+        "name": "DiamondCone 2",
+        "position": [-11, 0, -194],
+        "isTaken": false,
+        "isCollected": false
+      },
+      {
+        "id": "2",
+        "name": "DiamondCone 3",
+        "position": [3, 2.5, -94],
+        "isTaken": false,
+        "isCollected": false
+      },
+      {
+        "id": "3",
+        "name": "DiamondCone 4",
+        "position": [-5, 0.5, -103],
+        "isTaken": false,
+        "isCollected": false
+      },
+      {
+        "id": "4",
+        "name": "DiamondCone 5",
+        "position": [20, 2.5, -93],
+        "isTaken": false,
+        "isCollected": false
+      },
+      {
+        "id": "5",
+        "name": "DiamondCone 6",
+        "position": [10, 0.5, -40],
+        "isTaken": false,
+        "isCollected": false
+      },
+      {
+        "id": "6",
+        "name": "DiamondCone 7",
+        "position": [2, 0.2, -75],
+        "isTaken": false,
+        "isCollected": false
+      },
+      {
+        "id": "7",
+        "name": "DiamondCone 8",
+        "position": [9, 0.2, -73],
+        "isTaken": false,
+        "isCollected": false
+      },
+      {
+        "id": "8",
+        "name": "DiamondCone 9",
+        "position": [-2.5, 0.5, -178],
+        "isTaken": false,
+        "isCollected": false
+      },
+      {
+        "id": "9",
+        "name": "DiamondCone 10",
+        "position": [-6, 0.2, -189],
+        "isTaken": false,
+        "isCollected": false
+      },
+      {
+        "id": "10",
+        "name": "DiamondCone 11",
+        "position": [8, 0.2, -30],
+        "isTaken": false,
+        "isCollected": false
+      },
+      {
+        "id": "11",
+        "name": "DiamondCone 12",
+        "position": [8, 2, -30],
+        "isTaken": false,
+        "isCollected": false
+      },
+      {
+        "id": "12",
+        "name": "DiamondCone 13",
+        "position": [8, 0.2, -20],
+        "isTaken": false,
+        "isCollected": false
+      }
+    ]
+  }
+  

@@ -8,7 +8,7 @@ import Profile from '../pages/profile/Profile'
 import { useAudio } from '../context/AudioContext'
 import { useEffect } from 'react'
 
-export default function RoutesTDevGame() {
+export default function RoutesTDevGame () {
   const { mute } = useAudio()
 
   useEffect(() => {
