@@ -12,6 +12,10 @@ import PortalNextWorld from '../../globals/interactables/PortalNextWorld'
 import collectablesData from './collectables/CollectablesData.json'
 import checkpointsData from './checkpoints/CheckpointsData.json'
 import VillainsData from './villains/VillainsData.json'
+import Level2WorldZone1 from './world/Level2WorldZone1'
+import Level2WorldZone2 from './world/Level2WorldZone2'
+import Level2WorldZone3 from './world/Level2WorldZone3'
+import Level2WorldZone4 from './world/Level2WorldZone4'
 
 export default function Level2() {
   return (
@@ -23,6 +27,10 @@ export default function Level2() {
       physicsWorld={
         <>
           <Level2World />
+          <Level2WorldZone1 />
+          <Level2WorldZone2 />
+          <Level2WorldZone3 />
+          <Level2WorldZone4 />
           <Checkpoints checkpointsData={checkpointsData} />
           <Collectables collectablesData={collectablesData} />
           <SymbolicSensors />
