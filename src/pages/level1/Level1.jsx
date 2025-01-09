@@ -4,7 +4,6 @@ import Environments from './staging/Environments'
 import Level1World from './world/Level1World'
 import Texts from './abstractions/Texts'
 import PortalNextWorld from '../../globals/interactables/PortalNextWorld'
-import Checkpoints from '../../globals/interactables/CheckpointsGenerator'
 import Collectables from '../../globals/collectables/CollectablesGenerator'
 import SymbolicSensors from './world/SymbolicSensors'
 import ZoneSensors from './world/ZoneSensors'
@@ -24,7 +23,6 @@ export default function Level1() {
         <>
           <Level1World />
           <PortalNextWorld position={[0, 0, -224]} nextLevel='/level2' />
-          <Checkpoints checkpointsData={checkpointsData} />
           <Collectables collectablesData={collectablesData} />
           <SymbolicSensors />
           <ZoneSensors />
@@ -33,6 +31,7 @@ export default function Level1() {
         </>
       }
       texts={<Texts />}
+      checkpointsData={checkpointsData}
       nextLevelRoute='/level2'
       reloadLevelRoute='/level1'
     />

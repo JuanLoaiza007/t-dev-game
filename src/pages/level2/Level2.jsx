@@ -31,7 +31,6 @@ export default function Level2() {
           <Level2WorldZone2 />
           <Level2WorldZone3 />
           <Level2WorldZone4 />
-          <Checkpoints checkpointsData={checkpointsData} />
           <Collectables collectablesData={collectablesData} />
           <SymbolicSensors />
           <ManualColliders />
@@ -39,6 +38,7 @@ export default function Level2() {
           <PortalNextWorld position={[-24, 20, -102]} nextLevel='/level3' />
         </>
       }
+      checkpointsData={checkpointsData}
       texts={<Texts />}
       nextLevelRoute='/level3'
       reloadLevelRoute='/level2'

@@ -18,6 +18,7 @@ import Ecctrl from 'ecctrl'
 import Avatar from '../../utils/avatar/Avatar'
 import { usePlayer } from '../../context/PlayerContext'
 import { isPositionInCheckpoints } from '../../utils/controls/position'
+import Checkpoints from '../../globals/interactables/CheckpointsGenerator'
 
 const debug = process.env.REACT_APP_DEBUG !== 'production'
 
@@ -49,6 +50,14 @@ export default function LevelTemplate({
     const initialPosition = isValidPosition
       ? savedPosition
       : positionState.initialPosition
+    if (isValidPosition) {
+      console.log("We will use broswer's position")
+    } else {
+      console.log(
+        'We will use default position, is not valid browser: ',
+        savedPosition
+      )
+    }
     setActualPosition(initialPosition)
     guardarEnLocalStorage('actualPosition', initialPosition)
   }, [positionState.initialPosition])
@@ -91,6 +100,9 @@ export default function LevelTemplate({
           {environments}
           <Physics debug={debug}>
             {physicsWorld}
+            {checkpointsData && (
+              <Checkpoints checkpointsData={checkpointsData} />
+            )}
             {displayLife && renderAvatar()}
           </Physics>
           {texts}

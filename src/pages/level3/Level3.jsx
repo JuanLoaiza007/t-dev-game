@@ -21,7 +21,6 @@ export default function Level3() {
         <>
           <Level3World />
           <PortalNextWorld position={[10, 0, -200]} nextLevel='/level4' />
-          <Checkpoints checkpointsData={checkpointsData} />
           <Collectables collectablesData={collectablesData} />
         </>
       }

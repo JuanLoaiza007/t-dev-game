@@ -30,6 +30,7 @@ export default function Level4() {
       }
       texts={<Texts position={[0, 7, 12]} />}
       nextLevelRoute='/profile'
+      checkpointsData={checkpointsData}
       reloadLevelRoute='/level4'
     />
   )
