@@ -3,7 +3,8 @@ import Lights from './lights/Lights'
 import Environments from './staging/Environments'
 import { Model as Level4World } from './world/Level4World'
 import Texts from './abstractions/Texts'
-import Collectables from './collectables/Collectables'
+import collectablesData from './collectables/CollectablesData'
+import Collectables from '../../globals/collectables/CollectablesGenerator'
 import { Cubos } from '../../globals/collectables/Cubos'
 import { ObstaculoBarra } from '../../globals/collectables/ObstaculoBarra'
 import Rat from '../../globals/villains/Rat'
@@ -24,13 +25,13 @@ export default function Level4() {
           <ObstaculoBarra position={[0, 35, 90]} />
           <ObstaculoBarra position={[0, 35, 130]} />
           <Rat position={[0, 35, 160]} />
+          <Collectables collectablesData={collectablesData} />
           <Button_Circle position={[0, 34, 280]} ruta='/profile' />
-          <Collectables />
+          <Collectables collectablesData={collectablesData} />
         </>
       }
       texts={<Texts position={[0, 7, 12]} />}
       nextLevelRoute='/profile'
-      checkpointsData={checkpointsData}
       reloadLevelRoute='/level4'
     />
   )

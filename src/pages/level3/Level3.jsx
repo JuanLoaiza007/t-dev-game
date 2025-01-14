@@ -5,8 +5,8 @@ import Level3World from './world/Level3World'
 import Texts from './abstractions/Texts'
 import PortalNextWorld from '../../globals/interactables/PortalNextWorld'
 import Checkpoints from '../../globals/interactables/CheckpointsGenerator'
+import collectablesData from './collectables/CollectablesData'
 import Collectables from '../../globals/collectables/CollectablesGenerator'
-import collectablesData from './collectables/CollectablesData.json'
 import checkpointsData from './checkpoints/CheckpointsData.json'
 
 export default function Level3() {

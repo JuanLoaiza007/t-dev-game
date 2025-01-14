@@ -10,20 +10,31 @@ function print_debug(text) {
   }
 }
 
+// Map each type to its respective component
+const collectableComponents = {
+  diamondCone: DiamondCone
+}
+
 export default function Collectables({ collectablesData }) {
   const [collectables, setCollectables] = useState([])
 
-  // Inicializar coleccionables desde los datos proporcionados
+  // Generate collectables with auto-assigned IDs
   useEffect(() => {
-    setCollectables(collectablesData.collectables)
+    const initializedCollectables = collectablesData.map(
+      (collectable, index) => ({
+        id: index,
+        ...collectable
+      })
+    )
+    setCollectables(initializedCollectables)
   }, [collectablesData])
 
-  // Depuración de cambios en el estado de los coleccionables
+  // Debug changes in collectables
   useEffect(() => {
-    print_debug('Change on collectables:', collectables)
+    print_debug(`Collectables state updated: ${JSON.stringify(collectables)}`)
   }, [collectables])
 
-  // Actualizar el estado de un coleccionable específico
+  // Update a specific collectable's state
   const updateCollectableState = (id, newState) => {
     setCollectables((prevCollectables) =>
       prevCollectables.map((collectable) =>
@@ -34,20 +45,28 @@ export default function Collectables({ collectablesData }) {
 
   return (
     <>
-      {collectables.map((collectable) => (
-        <Collectable
-          key={collectable.id}
-          soundEffect={collectable.soundEffect || 'diamondCollect'}
-          colliderName={
-            collectable.colliderName || 'character-capsule-collider'
-          }
-          onUpdateState={(newState) =>
-            updateCollectableState(collectable.id, newState)
-          }
-        >
-          <DiamondCone position={collectable.position} />
-        </Collectable>
-      ))}
+      {collectables.map((collectable) => {
+        const CollectableComponent = collectableComponents[collectable.type]
+        if (!CollectableComponent) {
+          print_debug(`Unknown collectable type: ${collectable.type}`)
+          return null
+        }
+
+        return (
+          <Collectable
+            key={collectable.id}
+            soundEffect={collectable.soundEffect || 'diamondCollect'}
+            colliderName={
+              collectable.colliderName || 'character-capsule-collider'
+            }
+            onUpdateState={(newState) =>
+              updateCollectableState(collectable.id, newState)
+            }
+          >
+            <CollectableComponent position={collectable.position} />
+          </Collectable>
+        )
+      })}
     </>
   )
 }

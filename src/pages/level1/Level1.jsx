@@ -9,7 +9,7 @@ import SymbolicSensors from './world/SymbolicSensors'
 import ZoneSensors from './world/ZoneSensors'
 import Button from '../../globals/interactables/Button'
 import Rat from '../../globals/villains/Rat'
-import collectablesData from './collectables/CollectablesData.json'
+import collectablesData from './collectables/CollectablesData'
 import checkpointsData from './checkpoints/CheckpointsData.json'
 
 export default function Level1() {
