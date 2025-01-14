@@ -1,30 +1,32 @@
-// [CollectablesGenerator.jsx]
-
 import React, { useState, useEffect } from 'react'
+import Collectable from './Collectable'
 import DiamondCone from './DiamondCone'
 
 const debug = true
 
-function print_debug (text) {
+function print_debug(text) {
   if (debug) {
-    console.log(`[Collectables.jsx]: ${text}`)
+    console.log(`[CollectablesGenerator.jsx]: ${text}`)
   }
 }
 
-export default function Collectables ({ collectablesData }) {
+export default function Collectables({ collectablesData }) {
   const [collectables, setCollectables] = useState([])
 
+  // Inicializar coleccionables desde los datos proporcionados
   useEffect(() => {
     setCollectables(collectablesData.collectables)
-  }, [])
+  }, [collectablesData])
 
+  // Depuración de cambios en el estado de los coleccionables
   useEffect(() => {
-    console.log('Change on collectables:', collectables)
+    print_debug('Change on collectables:', collectables)
   }, [collectables])
 
+  // Actualizar el estado de un coleccionable específico
   const updateCollectableState = (id, newState) => {
-    setCollectables(prevCollectables =>
-      prevCollectables.map(collectable =>
+    setCollectables((prevCollectables) =>
+      prevCollectables.map((collectable) =>
         collectable.id === id ? { ...collectable, ...newState } : collectable
       )
     )
@@ -33,11 +35,18 @@ export default function Collectables ({ collectablesData }) {
   return (
     <>
       {collectables.map((collectable) => (
-        <DiamondCone
+        <Collectable
           key={collectable.id}
-          position={collectable.position}
-          onUpdateState={(newState) => updateCollectableState(collectable.id, newState)}
-        />
+          soundEffect={collectable.soundEffect || 'diamondCollect'}
+          colliderName={
+            collectable.colliderName || 'character-capsule-collider'
+          }
+          onUpdateState={(newState) =>
+            updateCollectableState(collectable.id, newState)
+          }
+        >
+          <DiamondCone position={collectable.position} />
+        </Collectable>
       ))}
     </>
   )
