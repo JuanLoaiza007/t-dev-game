@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { RigidBody } from '@react-three/rapier'
 import { useAudio } from '../../context/AudioContext'
-import { useCollectablesState } from '../../utils/components/controller/CharacterCollectables'
+import { usePlayer } from '../../context/PlayerContext'
 
 const debug = false
 const disableCollect4Debug = false
@@ -13,30 +13,26 @@ function print_debug(text) {
 }
 
 export default function Collectable({
+  id,
+  level,
   children,
-  onUpdateState,
   soundEffect = 'collected',
   collidableObjects = ['character-capsule-collider']
 }) {
   const { playSoundEffect } = useAudio()
-  const [isTaken, setIsTaken] = useState(false)
-  const collectableCountState = useCollectablesState()
+  const { player, updateCollectableState } = usePlayer()
+  const [isTaken, setIsTaken] = useState(
+    player.collectablesState[level]?.[id] || false
+  )
 
   const handleIntersectionEnter = (event) => {
     print_debug(`Colisioné con: ${event.colliderObject.name}`)
     if (collidableObjects.includes(event.colliderObject.name)) {
       playSoundEffect(soundEffect)
       setIsTaken(true)
-      collectableCountState.increment()
-      onUpdateState?.({ isTaken: true })
+      updateCollectableState(level, id, true)
     }
   }
-
-  useEffect(() => {
-    if (debug && isTaken) {
-      console.log(`[Collectable]: Coleccionable tomado`)
-    }
-  }, [isTaken])
 
   return (
     !isTaken && (

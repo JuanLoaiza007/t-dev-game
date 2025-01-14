@@ -6,7 +6,7 @@ import Texts from './abstractions/Texts'
 import PortalNextWorld from '../../globals/interactables/PortalNextWorld'
 import Checkpoints from '../../globals/interactables/CheckpointsGenerator'
 import collectablesData from './collectables/CollectablesData'
-import Collectables from '../../globals/collectables/CollectablesGenerator'
+import CollectablesGenerator from '../../globals/collectables/CollectablesGenerator'
 import checkpointsData from './checkpoints/CheckpointsData.json'
 
 export default function Level3() {
@@ -21,7 +21,10 @@ export default function Level3() {
         <>
           <Level3World />
           <PortalNextWorld position={[10, 0, -200]} nextLevel='/level4' />
-          <Collectables collectablesData={collectablesData} />
+          <CollectablesGenerator
+            collectablesData={collectablesData}
+            level={'level_3'}
+          />
         </>
       }
       texts={<Texts />}

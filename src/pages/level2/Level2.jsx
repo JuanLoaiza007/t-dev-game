@@ -4,7 +4,7 @@ import Lights from './lights/Lights'
 import Environments from './staging/Environments'
 import Level2World from './world/Level2World'
 import Checkpoints from '../../globals/interactables/CheckpointsGenerator'
-import Collectables from '../../globals/collectables/CollectablesGenerator'
+import CollectablesGenerator from '../../globals/collectables/CollectablesGenerator'
 import SymbolicSensors from './world/SymbolicSensors'
 import ManualColliders from './world/ManualColliders'
 import Villains from '../../globals/villains/VillainsGenerator'
@@ -31,7 +31,10 @@ export default function Level2() {
           <Level2WorldZone2 />
           <Level2WorldZone3 />
           <Level2WorldZone4 />
-          <Collectables collectablesData={collectablesData} />
+          <CollectablesGenerator
+            collectablesData={collectablesData}
+            level={'level_2'}
+          />
           <SymbolicSensors />
           <ManualColliders />
           <Villains villainsData={VillainsData} />

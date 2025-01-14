@@ -4,7 +4,7 @@ import Environments from './staging/Environments'
 import Level1World from './world/Level1World'
 import Texts from './abstractions/Texts'
 import PortalNextWorld from '../../globals/interactables/PortalNextWorld'
-import Collectables from '../../globals/collectables/CollectablesGenerator'
+import CollectablesGenerator from '../../globals/collectables/CollectablesGenerator'
 import SymbolicSensors from './world/SymbolicSensors'
 import ZoneSensors from './world/ZoneSensors'
 import Button from '../../globals/interactables/Button'
@@ -23,7 +23,10 @@ export default function Level1() {
         <>
           <Level1World />
           <PortalNextWorld position={[0, 0, -224]} nextLevel='/level2' />
-          <Collectables collectablesData={collectablesData} />
+          <CollectablesGenerator
+            collectablesData={collectablesData}
+            level={'level_1'}
+          />
           <SymbolicSensors />
           <ZoneSensors />
           <Button position={[0, -0.5, -158]} />

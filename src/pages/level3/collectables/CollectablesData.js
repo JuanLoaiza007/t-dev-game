@@ -1,61 +1,79 @@
 const collectablesData = [
   {
     type: 'diamondCone',
-    position: [0, 0, 10],
+    position: [-19, 0.5, -10],
     isTaken: false,
     isCollected: false
   },
   {
     type: 'diamondCone',
-    position: [12.5, 6, 30],
+    position: [-11, 0, -194],
     isTaken: false,
     isCollected: false
   },
   {
     type: 'diamondCone',
-    position: [-12.5, 14, 38],
+    position: [3, 2.5, -94],
     isTaken: false,
     isCollected: false
   },
   {
     type: 'diamondCone',
-    position: [12.5, 21.5, 49],
+    position: [-5, 0.5, -103],
     isTaken: false,
     isCollected: false
   },
   {
     type: 'diamondCone',
-    position: [-5, 35, 65],
+    position: [20, 2.5, -93],
     isTaken: false,
     isCollected: false
   },
   {
     type: 'diamondCone',
-    position: [-4, 35, 110],
+    position: [10, 0.5, -40],
     isTaken: false,
     isCollected: false
   },
   {
     type: 'diamondCone',
-    position: [0, 35, 170],
+    position: [2, 0.2, -75],
     isTaken: false,
     isCollected: false
   },
   {
     type: 'diamondCone',
-    position: [0, 35, 200],
+    position: [9, 0.2, -73],
     isTaken: false,
     isCollected: false
   },
   {
     type: 'diamondCone',
-    position: [0, 35, 250],
+    position: [-2.5, 0.5, -178],
     isTaken: false,
     isCollected: false
   },
   {
     type: 'diamondCone',
-    position: [0, 35, 270],
+    position: [-6, 0.2, -189],
+    isTaken: false,
+    isCollected: false
+  },
+  {
+    type: 'diamondCone',
+    position: [8, 0.2, -30],
+    isTaken: false,
+    isCollected: false
+  },
+  {
+    type: 'diamondCone',
+    position: [8, 2, -30],
+    isTaken: false,
+    isCollected: false
+  },
+  {
+    type: 'diamondCone',
+    position: [8, 0.2, -20],
     isTaken: false,
     isCollected: false
   }
