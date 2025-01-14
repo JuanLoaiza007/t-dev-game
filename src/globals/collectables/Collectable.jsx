@@ -16,7 +16,7 @@ export default function Collectable({
   children,
   onUpdateState,
   soundEffect = 'collected',
-  colliderName = 'character-capsule-collider'
+  collidableObjects = ['character-capsule-collider']
 }) {
   const { playSoundEffect } = useAudio()
   const [isTaken, setIsTaken] = useState(false)
@@ -24,7 +24,7 @@ export default function Collectable({
 
   const handleIntersectionEnter = (event) => {
     print_debug(`Colisioné con: ${event.colliderObject.name}`)
-    if (event.colliderObject.name === colliderName) {
+    if (collidableObjects.includes(event.colliderObject.name)) {
       playSoundEffect(soundEffect)
       setIsTaken(true)
       collectableCountState.increment()

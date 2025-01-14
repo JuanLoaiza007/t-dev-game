@@ -43,10 +43,20 @@ export default function Collectables({ collectablesData }) {
     )
   }
 
+  const generateSoundEffect = (collectable) => {
+    switch (collectable.type) {
+      case 'diamondCone':
+        return 'diamondCollect'
+      default:
+        return 'collected'
+    }
+  }
+
   return (
     <>
       {collectables.map((collectable) => {
         const CollectableComponent = collectableComponents[collectable.type]
+        const soundEffect = generateSoundEffect(collectable)
         if (!CollectableComponent) {
           print_debug(`Unknown collectable type: ${collectable.type}`)
           return null
@@ -55,10 +65,7 @@ export default function Collectables({ collectablesData }) {
         return (
           <Collectable
             key={collectable.id}
-            soundEffect={collectable.soundEffect || 'diamondCollect'}
-            colliderName={
-              collectable.colliderName || 'character-capsule-collider'
-            }
+            soundEffect={soundEffect}
             onUpdateState={(newState) =>
               updateCollectableState(collectable.id, newState)
             }
