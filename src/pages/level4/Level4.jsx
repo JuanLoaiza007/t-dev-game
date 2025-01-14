@@ -10,10 +10,12 @@ import { ObstaculoBarra } from '../../globals/collectables/ObstaculoBarra'
 import Rat from '../../globals/villains/Rat'
 import { Button_Circle } from '../../globals/collectables/Button'
 
+const levelName = 'level_4'
+
 export default function Level4() {
   return (
     <LevelTemplate
-      level={4}
+      level={levelName}
       initialPosition={[0, 0, 0]}
       lights={<Lights />}
       environments={<Environments />}
@@ -28,7 +30,7 @@ export default function Level4() {
           <Button_Circle position={[0, 34, 280]} ruta='/profile' />
           <CollectablesGenerator
             collectablesData={collectablesData}
-            level={'level_4'}
+            level={levelName}
           />
         </>
       }

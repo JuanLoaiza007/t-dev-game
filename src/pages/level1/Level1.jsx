@@ -12,10 +12,12 @@ import Rat from '../../globals/villains/Rat'
 import collectablesData from './collectables/CollectablesData'
 import checkpointsData from './checkpoints/CheckpointsData.json'
 
+const levelName = 'level_1'
+
 export default function Level1() {
   return (
     <LevelTemplate
-      level={1}
+      level={levelName}
       initialPosition={[0, 0, 0]}
       lights={<Lights />}
       environments={<Environments />}
@@ -25,7 +27,7 @@ export default function Level1() {
           <PortalNextWorld position={[0, 0, -224]} nextLevel='/level2' />
           <CollectablesGenerator
             collectablesData={collectablesData}
-            level={'level_1'}
+            level={levelName}
           />
           <SymbolicSensors />
           <ZoneSensors />

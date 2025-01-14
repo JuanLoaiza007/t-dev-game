@@ -17,10 +17,12 @@ import Level2WorldZone2 from './world/Level2WorldZone2'
 import Level2WorldZone3 from './world/Level2WorldZone3'
 import Level2WorldZone4 from './world/Level2WorldZone4'
 
+const levelName = 'level_2'
+
 export default function Level2() {
   return (
     <LevelTemplate
-      level={2}
+      level={levelName}
       initialPosition={[0, 0, 0]}
       lights={<Lights />}
       environments={<Environments />}
@@ -33,7 +35,7 @@ export default function Level2() {
           <Level2WorldZone4 />
           <CollectablesGenerator
             collectablesData={collectablesData}
-            level={'level_2'}
+            level={levelName}
           />
           <SymbolicSensors />
           <ManualColliders />

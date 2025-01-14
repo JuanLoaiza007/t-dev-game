@@ -9,10 +9,12 @@ import collectablesData from './collectables/CollectablesData'
 import CollectablesGenerator from '../../globals/collectables/CollectablesGenerator'
 import checkpointsData from './checkpoints/CheckpointsData.json'
 
+const levelName = 'level_3'
+
 export default function Level3() {
   return (
     <LevelTemplate
-      level={3}
+      level={levelName}
       initialPosition={[0, 0, 0]}
       checkpointsData={checkpointsData}
       lights={<Lights />}
@@ -23,7 +25,7 @@ export default function Level3() {
           <PortalNextWorld position={[10, 0, -200]} nextLevel='/level4' />
           <CollectablesGenerator
             collectablesData={collectablesData}
-            level={'level_3'}
+            level={levelName}
           />
         </>
       }
