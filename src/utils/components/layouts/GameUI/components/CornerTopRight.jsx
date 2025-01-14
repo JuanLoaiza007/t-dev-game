@@ -18,7 +18,9 @@ const CornerTopRight = () => {
         className='life-bar'
         style={{ width: `${(player.lives / 3) * 100}%` }}
       />
-      <div className='diamond-count'>💎 x {player.diamondsCollected}</div>
+      <div className='diamond-count'>
+        💎 x {player.currentLevelCollectables}
+      </div>
     </div>
   )
 }

@@ -1,4 +1,3 @@
-// [GameUI.jsx]
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useLifeState } from '../../controller/CharacterLife'
@@ -9,7 +8,7 @@ import { usePlayer } from '../../../../context/PlayerContext'
 
 const debug = false
 
-function print_debug (text) {
+function print_debug(text) {
   if (debug) {
     console.log(`[GameUI.jsx]: ${text}`)
   }
@@ -35,8 +34,7 @@ const GameUI = () => {
   return (
     <>
       <CornerTopRight playerName={playerData?.displayName} />
-      {savingState.isSaving &&
-        <CreateSaveIndicator />}
+      {savingState.isSaving && <CreateSaveIndicator />}
     </>
   )
 }
