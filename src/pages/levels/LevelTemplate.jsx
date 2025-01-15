@@ -56,13 +56,26 @@ export default function LevelTemplate({
         canvasRef.current &&
         document.pointerLockElement !== canvasRef.current
       ) {
+        const docElement = document.documentElement
+        if (docElement.requestFullscreen) {
+          docElement.requestFullscreen()
+        } else if (docElement.mozRequestFullScreen) {
+          docElement.mozRequestFullScreen()
+        } else if (docElement.webkitRequestFullscreen) {
+          docElement.webkitRequestFullscreen()
+        } else if (docElement.msRequestFullscreen) {
+          docElement.msRequestFullscreen()
+        }
         canvasRef.current.requestPointerLock()
       }
     }
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
-        document.exitPointerLock()
+        if (document.exitFullscreen) {
+          document.exitFullscreen()
+        }
+        document.exitPointerLock && document.exitPointerLock()
       }
     }
 
