@@ -35,9 +35,7 @@ export default function Level1() {
           <ZoneSensors />
           <Button
             position={[0, -0.5, -158]}
-            interactFunction={() => {
-              setStairsActived(!stairsActived)
-            }}
+            interactFunction={() => setStairsActived((prev) => !prev)}
           />
           <Rat position={[0, 0, -135]} />
           {stairsActived && <Level1WorldStairs />}
