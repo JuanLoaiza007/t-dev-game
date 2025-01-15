@@ -1,4 +1,3 @@
-// [Buton.jsx]
 import React, { useState } from 'react'
 import { useGLTF, Sparkles } from '@react-three/drei'
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
@@ -6,13 +5,13 @@ import { useCharacterInteraction } from '../../utils/components/controller/Chara
 
 const debug = false
 
-function print_debug (text) {
+function print_debug(text) {
   if (debug) {
     console.log(`[Button.jsx]: ${text}`)
   }
 }
 
-export default function Button (props) {
+export default function Button(props) {
   const characterInteractionState = useCharacterInteraction()
   const { nodes, materials } = useGLTF('/assets/models/objects/button.glb')
   const [canInteract, setCanInteract] = useState(false)
@@ -23,7 +22,11 @@ export default function Button (props) {
     if (event.colliderObject.name === 'character-capsule-collider') {
       setCanInteract(true)
       characterInteractionState.assign(() => {
-        if (!props.interactFunction) { print_debug('No me has asignado props.interactionFunction!!!') } else { props.interactFunction() }
+        if (!props.interactFunction) {
+          print_debug('No me has asignado props.interactionFunction!!!')
+        } else {
+          props.interactFunction()
+        }
       })
     }
   }
@@ -54,10 +57,7 @@ export default function Button (props) {
             material={materials.Botón}
           />
         </group>
-        <CuboidCollider
-          position={[0, 0.6, 0]}
-          args={[0.25, 1, 0.25]}
-        />
+        <CuboidCollider position={[0, 0.6, 0]} args={[0.25, 1, 0.25]} />
 
         {/* Sensor para interactuar */}
         <CuboidCollider
@@ -68,17 +68,17 @@ export default function Button (props) {
           sensor
         />
         {/* Retroalimentacion de interactuar */}
-        {canInteract &&
-          (<Sparkles
+        {canInteract && (
+          <Sparkles
             position={[0, 1, 0]}
             count={10}
             speed={1}
             color='blue'
             size={6}
             scale={2}
-          />)}
+          />
+        )}
       </group>
-
     </RigidBody>
   )
 }
