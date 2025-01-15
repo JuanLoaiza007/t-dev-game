@@ -39,7 +39,7 @@ export default function Level2() {
           />
           <SymbolicSensors />
           <ManualColliders />
-          <Villains villainsData={VillainsData} />
+          {/* <Villains villainsData={VillainsData} /> */}
           <PortalNextWorld position={[-24, 20, -102]} nextLevel='/level3' />
         </>
       }

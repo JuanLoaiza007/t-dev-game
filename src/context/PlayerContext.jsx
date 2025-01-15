@@ -6,7 +6,7 @@ export const playerContext = createContext()
 export const usePlayer = () => {
   const context = useContext(playerContext)
   if (!context) {
-    console.error('Error: usePlayer debe ser usado dentro de un PlayerProvider')
+    console.error('Error: usePlayer must be used within a PlayerProvider')
     return
   }
   return context
@@ -76,9 +76,18 @@ export function PlayerProvider({ children }) {
     })
   }
 
+  const updatePlayerPosition = (position) => {
+    setPlayer((prev) => ({ ...prev, currentPosition: position }))
+  }
+
   return (
     <playerContext.Provider
-      value={{ player, setPlayer, updateCollectableState }}
+      value={{
+        player,
+        setPlayer,
+        updateCollectableState,
+        updatePlayerPosition
+      }}
     >
       {children}
     </playerContext.Provider>
