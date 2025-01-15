@@ -1,16 +1,20 @@
-# Exclusiones IDE
+# IDE
 .idea
 .vscode
 
-# Exlusones entorno virtual
+# Virtual environment
 venv
 .env
 
-# Exclusiones vercel
+# Vercel
 .vercel
 
-# Exclusiones Node
+# Node
 node_modules
 
-# Exclusiones blender
+# Node package manager
+.lock
+-lock.json
+
+# Blender
 *.blend1

@@ -14,7 +14,7 @@ import Avatar from '../../utils/avatar/Avatar'
 import { usePlayer } from '../../context/PlayerContext'
 import Checkpoints from '../../globals/interactables/CheckpointsGenerator'
 
-const debug = process.env.REACT_APP_DEBUG !== 'production'
+const debug = process.env.REACT_APP_ENVIRONMENT !== 'production'
 
 export default function LevelTemplate({
   level,

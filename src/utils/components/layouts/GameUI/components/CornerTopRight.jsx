@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import './CornerTopRight.css'
 import { usePlayer } from '../../../../../context/PlayerContext'
 
 const CornerTopRight = () => {
@@ -12,13 +11,9 @@ const CornerTopRight = () => {
   }, [player.lives])
 
   return (
-    <div className='container-top-right'>
-      <div className='life-label'>{vida}</div>
-      <div
-        className='life-bar'
-        style={{ width: `${(player.lives / 3) * 100}%` }}
-      />
-      <div className='diamond-count'>
+    <div className='absolute top-5 right-5 p-2 text-right select-none'>
+      <div className='text-2xl text-shadow-black'>{vida}</div>
+      <div className='text-xl font-bold text-white text-shadow-black'>
         💎 x {player.currentLevelCollectables}
       </div>
     </div>
