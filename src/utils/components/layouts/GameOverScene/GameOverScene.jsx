@@ -8,8 +8,8 @@ export default function GameOverScene({ mainMenu, reloadLevel }) {
   const reloadRoute = reloadLevel || '/level1'
 
   const options = [
-    { label: 'Menú Principal', action: () => navigate(menuRoute) },
-    { label: 'Jugar de nuevo', action: () => navigate(0) }
+    { label: 'Jugar de nuevo', action: () => navigate(0) },
+    { label: 'Menú Principal', action: () => navigate(menuRoute) }
   ]
 
   const handleSelect = (index) => {
