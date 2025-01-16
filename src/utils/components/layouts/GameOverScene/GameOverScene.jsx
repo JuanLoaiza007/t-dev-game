@@ -1,14 +1,20 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { usePlayer } from '../../../../context/PlayerContext'
 import MenuOptions from '../MenuOptions'
 
-export default function GameOverScene({ mainMenu, reloadLevel }) {
+export default function GameOverScene({ mainMenu }) {
   const navigate = useNavigate()
-  const menuRoute = mainMenu ? reloadLevel : '/'
-  const reloadRoute = reloadLevel || '/level1'
+  const { restartLevel } = usePlayer()
+  const menuRoute = '/'
 
   const options = [
-    { label: 'Jugar de nuevo', action: () => navigate(0) },
+    {
+      label: 'Jugar de nuevo',
+      action: () => {
+        restartLevel()
+      }
+    },
     { label: 'Menú Principal', action: () => navigate(menuRoute) }
   ]
 

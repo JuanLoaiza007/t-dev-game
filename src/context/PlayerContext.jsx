@@ -13,7 +13,7 @@ export const usePlayer = () => {
 }
 
 export function PlayerProvider({ children }) {
-  const { life, reset } = useLifeState()
+  const { value: life, reset } = useLifeState()
 
   const basePlayer = {
     name: 'Jugador1',
@@ -30,17 +30,14 @@ export function PlayerProvider({ children }) {
     return storedPlayer ? JSON.parse(storedPlayer) : basePlayer
   })
 
-  // Sync player data with localStorage
   useEffect(() => {
     localStorage.setItem('playerData', JSON.stringify(player))
   }, [player])
 
-  // Update player lives
   useEffect(() => {
     setPlayer((prev) => ({ ...prev, lives: life }))
   }, [life])
 
-  // Update collectables count for the current level
   useEffect(() => {
     const currentLevel = player.currentLevel
     const collectablesInCurrentLevel =
@@ -53,7 +50,6 @@ export function PlayerProvider({ children }) {
     }))
   }, [player.collectablesState, player.currentLevel])
 
-  // Update total collectables count
   useEffect(() => {
     const totalCollectables = Object.keys(player.collectablesState).reduce(
       (acc, level) => {
@@ -86,6 +82,13 @@ export function PlayerProvider({ children }) {
     setPlayer(basePlayer)
   }
 
+  const restartLevel = () => {
+    reset()
+    setPlayer((prev) => ({
+      ...prev
+    }))
+  }
+
   return (
     <playerContext.Provider
       value={{
@@ -93,7 +96,8 @@ export function PlayerProvider({ children }) {
         setPlayer,
         updateCollectableState,
         updatePlayerPosition,
-        resetPlayerData
+        resetPlayerData,
+        restartLevel
       }}
     >
       {children}
