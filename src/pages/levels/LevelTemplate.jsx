@@ -22,6 +22,7 @@ export default function LevelTemplate({
   checkpointsData,
   lights,
   environments,
+  physicsProps,
   physicsWorld,
   texts,
   nextLevelRoute,
@@ -111,7 +112,7 @@ export default function LevelTemplate({
         <Suspense fallback={<Instructive />}>
           {lights}
           {environments}
-          <Physics debug={debug}>
+          <Physics debug={debug} {...physicsProps}>
             {physicsWorld}
             {checkpointsData && (
               <Checkpoints checkpointsData={checkpointsData} />

@@ -22,16 +22,19 @@ export default function Level3() {
       physicsWorld={
         <>
           <Level3World />
-          <PortalNextWorld position={[10, 0, -200]} nextLevel='/level4' />
+          <PortalNextWorld position={[10, 0, -200]} nextLevel='/level_4' />
           <CollectablesGenerator
             collectablesData={collectablesData}
             level={levelName}
           />
         </>
       }
+      physicsProps={{
+        gravity: [0, -18, 0]
+      }}
       texts={<Texts />}
-      nextLevelRoute='/level4'
-      reloadLevelRoute='/level3'
+      nextLevelRoute='/level_4'
+      reloadLevelRoute='/level_3'
     />
   )
 }

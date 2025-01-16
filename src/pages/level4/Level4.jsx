@@ -34,9 +34,12 @@ export default function Level4() {
           />
         </>
       }
+      physicsProps={{
+        gravity: [0, -14, 0]
+      }}
       texts={<Texts position={[0, 7, 12]} />}
       nextLevelRoute='/profile'
-      reloadLevelRoute='/level4'
+      reloadLevelRoute='/level_4'
     />
   )
 }

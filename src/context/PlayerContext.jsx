@@ -13,20 +13,21 @@ export const usePlayer = () => {
 }
 
 export function PlayerProvider({ children }) {
-  const { value: life } = useLifeState()
+  const { life, reset } = useLifeState()
+
+  const basePlayer = {
+    name: 'Jugador1',
+    lives: life,
+    currentLevel: 'level_1',
+    currentPosition: [0, 2, 0],
+    collectablesState: {},
+    currentLevelCollectables: 0,
+    totalCollectables: 0
+  }
+
   const [player, setPlayer] = useState(() => {
     const storedPlayer = localStorage.getItem('playerData')
-    return storedPlayer
-      ? JSON.parse(storedPlayer)
-      : {
-          name: 'Jugador1',
-          lives: life,
-          currentLevel: 1,
-          currentPosition: [0, 0, 0],
-          collectablesState: {},
-          currentLevelCollectables: 0,
-          totalCollectables: 0
-        }
+    return storedPlayer ? JSON.parse(storedPlayer) : basePlayer
   })
 
   // Sync player data with localStorage
@@ -80,13 +81,19 @@ export function PlayerProvider({ children }) {
     setPlayer((prev) => ({ ...prev, currentPosition: position }))
   }
 
+  const resetPlayerData = async () => {
+    reset()
+    setPlayer(basePlayer)
+  }
+
   return (
     <playerContext.Provider
       value={{
         player,
         setPlayer,
         updateCollectableState,
-        updatePlayerPosition
+        updatePlayerPosition,
+        resetPlayerData
       }}
     >
       {children}

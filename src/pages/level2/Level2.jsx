@@ -40,13 +40,16 @@ export default function Level2() {
           <SymbolicSensors />
           <ManualColliders />
           {/* <Villains villainsData={VillainsData} /> */}
-          <PortalNextWorld position={[-24, 20, -102]} nextLevel='/level3' />
+          <PortalNextWorld position={[-24, 20, -102]} nextLevel='/level_3' />
         </>
       }
+      physicsProps={{
+        gravity: [0, -18, 0]
+      }}
       checkpointsData={checkpointsData}
       texts={<Texts />}
-      nextLevelRoute='/level3'
-      reloadLevelRoute='/level2'
+      nextLevelRoute='/level_3'
+      reloadLevelRoute='/level_2'
     />
   )
 }

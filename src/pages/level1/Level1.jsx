@@ -27,7 +27,7 @@ export default function Level1() {
       physicsWorld={
         <>
           <Level1World />
-          <PortalNextWorld position={[0, 0, -224]} nextLevel='/level2' />
+          <PortalNextWorld position={[0, 0, -224]} nextLevel='/level_2' />
           <CollectablesGenerator
             collectablesData={collectablesData}
             level={levelName}
@@ -41,10 +41,13 @@ export default function Level1() {
           {stairsActived && <Level1WorldStairs />}
         </>
       }
+      physicsProps={{
+        gravity: [0, -14, 0]
+      }}
       texts={<Texts />}
       checkpointsData={checkpointsData}
-      nextLevelRoute='/level2'
-      reloadLevelRoute='/level1'
+      nextLevelRoute='/level_2'
+      reloadLevelRoute='/level_1'
     />
   )
 }
