@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import assets from '../../../../../_config/assets.json'
 import { ReactSVG } from 'react-svg'
 
-export default function CornerBottomRight() {
+export default function ControlsLayout() {
   const navigate = useNavigate()
 
   const handleClick = () => {
@@ -25,7 +25,7 @@ export default function CornerBottomRight() {
   }, [])
 
   return (
-    <div className='absolute bottom-5 right-5 p-2 text-right select-none'>
+    <div className='absolute left-0 top-1/3 px-4 select-none'>
       <div className='flex flex-row justify-center items-center gap-4'>
         <p className='text-white text-xl font-bold'>M</p>
         <button onClick={handleClick}>

@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useLifeState } from '../../controller/CharacterLife'
 import CornerTopRight from './components/CornerTopRight'
-import CornerBottomRight from './components/CornerBottomRight'
+import ControlsLayout from './components/ControlsLayout'
 import CreateSaveIndicator from './components/SaveIndicator'
 import { useSavingState } from './states/SavingState'
 import { usePlayer } from '../../../../context/PlayerContext'
@@ -36,7 +36,7 @@ const GameUI = () => {
     <>
       <CornerTopRight playerName={playerData?.displayName} />
       {savingState.isSaving && <CreateSaveIndicator />}
-      <CornerBottomRight />
+      <ControlsLayout />
     </>
   )
 }
