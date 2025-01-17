@@ -33,7 +33,6 @@ export default function LevelTemplate({
   const { player, setPlayer } = usePlayer()
 
   const [displayLife, setDisplayLife] = useState(true)
-
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -51,38 +50,41 @@ export default function LevelTemplate({
     setDisplayLife(lifeState.value > 0)
   }, [lifeState.value])
 
+  const handlePointerLock = (event) => {
+    if (
+      canvasRef.current &&
+      document.pointerLockElement !== canvasRef.current
+    ) {
+      canvasRef.current.requestPointerLock()
+      const docElement = document.documentElement
+      if (docElement.requestFullscreen) {
+        docElement.requestFullscreen()
+      } else if (docElement.mozRequestFullScreen) {
+        docElement.mozRequestFullScreen()
+      } else if (docElement.webkitRequestFullscreen) {
+        docElement.webkitRequestFullscreen()
+      } else if (docElement.msRequestFullscreen) {
+        docElement.msRequestFullscreen()
+      }
+    }
+  }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Escape') {
+      if (document.exitFullscreen) {
+        document.exitFullscreen()
+      }
+      if (document.exitPointerLock) {
+        document.exitPointerLock()
+      }
+    }
+  }
+
   useEffect(() => {
-    const handlePointerLock = (event) => {
-      if (
-        canvasRef.current &&
-        document.pointerLockElement !== canvasRef.current
-      ) {
-        const docElement = document.documentElement
-        if (docElement.requestFullscreen) {
-          docElement.requestFullscreen()
-        } else if (docElement.mozRequestFullScreen) {
-          docElement.mozRequestFullScreen()
-        } else if (docElement.webkitRequestFullscreen) {
-          docElement.webkitRequestFullscreen()
-        } else if (docElement.msRequestFullscreen) {
-          docElement.msRequestFullscreen()
-        }
-        canvasRef.current.requestPointerLock()
-      }
-    }
-
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        if (document.exitFullscreen) {
-          document.exitFullscreen()
-        }
-        document.exitPointerLock && document.exitPointerLock()
-      }
-    }
-
     if (canvasRef.current) {
       canvasRef.current.addEventListener('click', handlePointerLock)
     }
+
     document.addEventListener('keydown', handleKeyDown)
 
     return () => {
