@@ -71,10 +71,24 @@ export default function LevelTemplate({
 
   const handleKeyDown = (event) => {
     if (event.key === 'Escape') {
-      if (document.exitFullscreen) {
-        document.exitFullscreen()
+      if (
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+      ) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen()
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen()
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen()
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen()
+        }
       }
-      if (document.exitPointerLock) {
+
+      if (document.pointerLockElement) {
         document.exitPointerLock()
       }
     }
