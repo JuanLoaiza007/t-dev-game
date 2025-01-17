@@ -1,5 +1,5 @@
 import { Perf } from 'r3f-perf'
-import { KeyboardControls } from '@react-three/drei'
+import { Html, KeyboardControls } from '@react-three/drei'
 import { Physics } from '@react-three/rapier'
 import { Suspense, useState, useEffect, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
@@ -125,7 +125,13 @@ export default function LevelTemplate({
     <KeyboardControls map={map}>
       <Canvas ref={canvasRef} shadows>
         {debug && <Perf position='top-left' />}
-        <Suspense fallback={<Instructive />}>
+        <Suspense
+          fallback={
+            <Html fullscreen>
+              <Instructive />
+            </Html>
+          }
+        >
           {lights}
           {environments}
           <Physics debug={debug} {...physicsProps}>

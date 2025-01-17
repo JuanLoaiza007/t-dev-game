@@ -1,9 +1,6 @@
-// [Instructive.jsx]
-import './instructive.css'
 import React, { useRef } from 'react'
-import { Html } from '@react-three/drei'
 
-const Instructive = () => {
+export default function Instructive() {
   const imgRef = useRef()
 
   const pathImagenes = './assets/images/instructives/'
@@ -44,18 +41,19 @@ const Instructive = () => {
   const selectedText = textOptions[randomIndexText]
 
   return (
-    <Html fullscreen>
-      <div className='container-instructive'>
-        <h1 className='superior-left-text'>Cargando...</h1>
-        <img
-          ref={imgRef}
-          src={`${pathImagenes}${imageOptions[randomIndex]}.png`}
-          alt='Instructive'
-        />
-        <h1 className='inferior-right-text'>{selectedText}</h1>
-      </div>
-    </Html>
+    <div className='relative w-full h-full flex justify-center items-center bg-gradient-to-r from-blue-800 via-blue-600 to-blue-300 select-none overflow-hidden'>
+      <h1 className='absolute top-4 left-4 text-white text-5xl font-bold'>
+        {'Cargando...'}
+      </h1>
+      <img
+        ref={imgRef}
+        src={`${pathImagenes}${imageOptions[randomIndex]}.png`}
+        alt='Instructive'
+        className='w-full h-full object-cover select-none'
+      />
+      <h1 className='absolute bottom-4 right-4 bg-blue-800 p-2 text-white text-4xl font-bold'>
+        {selectedText}
+      </h1>
+    </div>
   )
 }
-
-export default Instructive

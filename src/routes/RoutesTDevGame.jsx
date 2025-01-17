@@ -5,6 +5,7 @@ import Level2 from '../pages/level2/Level2'
 import Level3 from '../pages/level3/Level3'
 import Level4 from '../pages/level4/Level4'
 import Profile from '../pages/profile/Profile'
+import Instructive from '../utils/components/layouts/instructive/Instructive'
 
 export default function RoutesTDevGame() {
   return (
@@ -16,6 +17,7 @@ export default function RoutesTDevGame() {
         <Route path='/level_3' element={<Level3 />} />
         <Route path='/level_4' element={<Level4 />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/instructive' element={<Instructive />} />
       </Routes>
     </BrowserRouter>
   )
