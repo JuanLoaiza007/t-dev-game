@@ -1,4 +1,3 @@
-// [AudioContext.jsx]
 import React, { createContext, useState, useContext, useEffect } from 'react'
 
 const AudioContext = createContext()
@@ -23,112 +22,136 @@ const initialState = {
 }
 
 export const AudioProvider = ({ children }) => {
-  const [sounds, setSounds] = useState(initialState)
+  const [sounds] = useState(initialState)
+
+  const [musicAudio, setMusicAudio] = useState(null)
+  const [musicVolume, setMusicVolume] = useState(1)
 
   const [currentSong, setCurrentSong] = useState(null)
-  const [activeSoundEffects, setActiveSoundEffects] = useState([])
-  const [currentAudio, setCurrentAudio] = useState(null)
-  const fadeDuration = 1000
+  const [soundEffectInstances, setSoundEffectInstances] = useState({})
+  const [soundEffectsVolume, setSoundEffectsVolume] = useState(1)
+
+  const fadeDuration = 500
 
   useEffect(() => {
-    const activeSounds = JSON.parse(localStorage.getItem('activeSounds')) || []
-    setActiveSoundEffects(activeSounds)
-  }, [])
+    const instances = {}
+    Object.keys(sounds.soundEffects).forEach((key) => {
+      instances[key] = new Audio(sounds.soundEffects[key])
+    })
+    setSoundEffectInstances(instances)
+  }, [sounds.soundEffects])
 
-  const handlePlayMusic = (songKey) => {
-    if (currentSong !== songKey) {
-      if (currentAudio) {
-        fadeOutCurrentSong()
-      }
-      const audio = new Audio(sounds.songs[songKey])
-      audio.loop = true
-      audio.volume = 0 // Comenzamos con volumen cero
-      audio.play().then(() => {
-        fadeInNewSong(audio)
-        setCurrentAudio(audio)
-        setCurrentSong(songKey)
-      }).catch((error) => {
-        console.error('Error al reproducir el audio:', error)
-      })
-    }
-  }
+  const fadeOut = async (audio) => {
+    return new Promise((resolve) => {
+      let volume = audio.volume
+      const fadeStep = volume / (fadeDuration / 50)
 
-  const fadeOutCurrentSong = () => {
-    if (!currentAudio) return
-    let volume = currentAudio.volume
-    const fadeStep = volume / (fadeDuration / 100)
-    const fadeOutInterval = setInterval(() => {
-      volume -= fadeStep
-      // Asegurar que el volumen mínimo sea 0
-      volume = Math.max(volume, 0)
-      currentAudio.volume = volume
-      if (volume <= 0) {
-        currentAudio.pause()
-        clearInterval(fadeOutInterval)
-      }
-    }, 100)
-  }
-
-  const fadeInNewSong = (audio) => {
-    let volume = 0
-    const fadeStep = 1 / (fadeDuration / 100)
-    const fadeInInterval = setInterval(() => {
-      volume += fadeStep
-      // Asegurar que el volumen máximo sea 1
-      volume = Math.min(volume, 1)
-      audio.volume = volume
-      if (volume >= 1) {
-        clearInterval(fadeInInterval)
-      }
-    }, 100)
-  }
-
-  const playSoundEffect = (soundKey) => {
-    const audio = new Audio(sounds.soundEffects[soundKey])
-    audio.play()
-    setActiveSoundEffects(prevState => [...prevState, soundKey])
-    localStorage.setItem('activeSounds', JSON.stringify([...activeSoundEffects, soundKey]))
-  }
-
-  const pauseSound = (soundKey) => {
-    if (sounds.songs[soundKey]) {
-      sounds.songs[soundKey].pause()
-    }
-  }
-
-  const stopAllSounds = () => {
-    if (currentAudio) {
-      currentAudio.pause()
-    }
-    setActiveSoundEffects([])
-    setCurrentSong(null)
-    setCurrentAudio(null)
-    localStorage.removeItem('activeSounds')
-  }
-
-  const mute = () => {
-    stopAllSounds()
-  }
-
-  const unmute = () => {
-    if (currentSong) {
-      handlePlayMusic(currentSong)
-    }
-    activeSoundEffects.forEach(soundKey => {
-      playSoundEffect(soundKey)
+      const interval = setInterval(() => {
+        volume = Math.max(volume - fadeStep, 0)
+        audio.volume = volume
+        if (volume <= 0) {
+          audio.pause()
+          clearInterval(interval)
+          resolve()
+        }
+      }, 50)
     })
   }
 
-  const values = {
-    handlePlayMusic,
-    playSoundEffect,
-    pauseSound,
-    mute,
-    unmute
+  const fadeIn = (audio) => {
+    let volume = 0
+    audio.volume = volume
+    const fadeStep = musicVolume / (fadeDuration / 50)
+
+    const interval = setInterval(() => {
+      volume = Math.min(volume + fadeStep, musicVolume)
+      audio.volume = volume
+      if (volume >= musicVolume) {
+        clearInterval(interval)
+      }
+    }, 50)
   }
 
+  const playMusic = async (songKey) => {
+    try {
+      if (currentSong === songKey) return
+
+      if (musicAudio) {
+        await fadeOut(musicAudio)
+      }
+
+      const newAudio = new Audio(sounds.songs[songKey])
+      newAudio.loop = true
+      newAudio.volume = 0
+      newAudio.play().then(() => {
+        fadeIn(newAudio)
+        setMusicAudio(newAudio)
+        setCurrentSong(songKey)
+      })
+    } catch (error) {
+      console.error('Error playing music:', error)
+    }
+  }
+
+  const playSoundEffect = (soundKey) => {
+    try {
+      if (soundEffectInstances[soundKey]) {
+        const audio = soundEffectInstances[soundKey].cloneNode()
+        audio.volume = soundEffectsVolume
+        audio.play()
+      }
+    } catch (error) {
+      console.error('Error playing sound effect:', error)
+    }
+  }
+
+  const setMusicVolumeLevel = (volume) => {
+    setMusicVolume(volume)
+    if (musicAudio) {
+      musicAudio.volume = volume
+    }
+  }
+
+  const setSoundEffectsVolumeLevel = (volume) => {
+    setSoundEffectsVolume(volume)
+  }
+
+  const stopAllSounds = () => {
+    if (musicAudio) {
+      musicAudio.pause()
+      setMusicAudio(null)
+      setCurrentSong(null)
+    }
+  }
+
+  const muteAll = () => {
+    setMusicVolumeLevel(0)
+    setSoundEffectsVolumeLevel(0)
+  }
+
+  const unmuteAll = () => {
+    setMusicVolumeLevel(1)
+    setSoundEffectsVolumeLevel(1)
+  }
+
+  console.log({
+    currentSong,
+    musicVolume,
+    soundEffectsVolume
+  })
+
   return (
-    <AudioContext.Provider value={values}>
+    <AudioContext.Provider
+      value={{
+        playMusic,
+        playSoundEffect,
+        setMusicVolumeLevel,
+        setSoundEffectsVolumeLevel,
+        stopAllSounds,
+        muteAll,
+        unmuteAll
+      }}
+    >
       {children}
     </AudioContext.Provider>
   )
@@ -136,10 +159,8 @@ export const AudioProvider = ({ children }) => {
 
 export const useAudio = () => {
   const context = useContext(AudioContext)
-
   if (!context) {
-    throw new Error('useAudio debe ser utilizado dentro de un AudioProvider')
+    throw new Error('useAudio must be used within an AudioProvider')
   }
-
   return context
 }
