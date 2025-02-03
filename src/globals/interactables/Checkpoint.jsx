@@ -15,11 +15,11 @@ function print_debug(text) {
 export default function Checkpoint(props) {
   const { handlePlayMusic, playSoundEffect } = useAudio()
   const savingState = useSavingState()
-  const { updatePlayerPosition } = usePlayer()
+  const { updatePlayerCurrentCheckpoint } = usePlayer()
 
   const handleCheckpoint = (event) => {
     if (event.colliderObject.name === 'character-capsule-collider') {
-      updatePlayerPosition(props.position)
+      updatePlayerCurrentCheckpoint(props.position)
       print_debug(`${props.name} reached`)
     }
   }

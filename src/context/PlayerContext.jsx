@@ -20,6 +20,7 @@ export function PlayerProvider({ children }) {
     lives: life,
     currentLevel: 'level_1',
     currentPosition: [0, 2, 0],
+    currentCheckpoint: [0, 2, 0],
     collectablesState: {},
     currentLevelCollectables: 0,
     totalCollectables: 0
@@ -77,6 +78,10 @@ export function PlayerProvider({ children }) {
     setPlayer((prev) => ({ ...prev, currentPosition: position }))
   }
 
+  const updatePlayerCurrentCheckpoint = (position) => {
+    setPlayer((prev) => ({ ...prev, currentCheckpoint: position }))
+  }
+
   const resetPlayerData = async () => {
     reset()
     setPlayer(basePlayer)
@@ -85,7 +90,8 @@ export function PlayerProvider({ children }) {
   const restartLevel = () => {
     reset()
     setPlayer((prev) => ({
-      ...prev
+      ...prev,
+      currentPosition: player.currentCheckpoint
     }))
   }
 
@@ -95,6 +101,7 @@ export function PlayerProvider({ children }) {
         player,
         setPlayer,
         updateCollectableState,
+        updatePlayerCurrentCheckpoint,
         updatePlayerPosition,
         resetPlayerData,
         restartLevel
