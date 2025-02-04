@@ -24,12 +24,14 @@ const initialState = {
 export const AudioProvider = ({ children }) => {
   const [sounds] = useState(initialState)
 
-  const [musicAudio, setMusicAudio] = useState(null)
+  // Canal exclusivo de música
+  const [musicAudio] = useState(new Audio())
   const [musicVolume, setMusicVolume] = useState(1)
-
   const [currentSong, setCurrentSong] = useState(null)
-  const [soundEffectInstances, setSoundEffectInstances] = useState({})
+
+  // Canal exclusivo de efectos de sonido
   const [soundEffectsVolume, setSoundEffectsVolume] = useState(1)
+  const [soundEffectInstances, setSoundEffectInstances] = useState({})
 
   const fadeDuration = 500
 
@@ -39,7 +41,10 @@ export const AudioProvider = ({ children }) => {
       instances[key] = new Audio(sounds.soundEffects[key])
     })
     setSoundEffectInstances(instances)
-  }, [sounds.soundEffects])
+
+    musicAudio.loop = true
+    musicAudio.volume = musicVolume
+  }, [sounds.soundEffects, musicAudio, musicVolume])
 
   const fadeOut = async (audio) => {
     return new Promise((resolve) => {
@@ -76,40 +81,46 @@ export const AudioProvider = ({ children }) => {
     try {
       if (currentSong === songKey) return
 
-      if (musicAudio) {
+      if (!sounds.songs[songKey]) {
+        console.error(`No se encontró la canción con clave: ${songKey}`)
+        return
+      }
+
+      if (!musicAudio.paused) {
         await fadeOut(musicAudio)
       }
 
-      const newAudio = new Audio(sounds.songs[songKey])
-      newAudio.loop = true
-      newAudio.volume = 0
-      newAudio.play().then(() => {
-        fadeIn(newAudio)
-        setMusicAudio(newAudio)
+      musicAudio.src = sounds.songs[songKey]
+      musicAudio.load()
+      musicAudio.play().then(() => {
+        fadeIn(musicAudio)
         setCurrentSong(songKey)
       })
     } catch (error) {
-      console.error('Error playing music:', error)
+      console.error('Error al reproducir música:', error)
     }
   }
 
   const playSoundEffect = (soundKey) => {
     try {
-      if (soundEffectInstances[soundKey]) {
-        const audio = soundEffectInstances[soundKey].cloneNode()
-        audio.volume = soundEffectsVolume
-        audio.play()
+      if (!soundEffectInstances[soundKey]) {
+        console.error(
+          `No se encontró el efecto de sonido con clave: ${soundKey}`
+        )
+        return
       }
+
+      const audio = soundEffectInstances[soundKey].cloneNode()
+      audio.volume = soundEffectsVolume
+      audio.play()
     } catch (error) {
-      console.error('Error playing sound effect:', error)
+      console.error('Error al reproducir efecto de sonido:', error)
     }
   }
 
   const setMusicVolumeLevel = (volume) => {
     setMusicVolume(volume)
-    if (musicAudio) {
-      musicAudio.volume = volume
-    }
+    musicAudio.volume = volume
   }
 
   const setSoundEffectsVolumeLevel = (volume) => {
@@ -117,11 +128,10 @@ export const AudioProvider = ({ children }) => {
   }
 
   const stopAllSounds = () => {
-    if (musicAudio) {
-      musicAudio.pause()
-      setMusicAudio(null)
+    fadeOut(musicAudio).then(() => {
+      musicAudio.src = ''
       setCurrentSong(null)
-    }
+    })
   }
 
   const muteAll = () => {
