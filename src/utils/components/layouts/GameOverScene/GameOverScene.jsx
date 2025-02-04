@@ -15,7 +15,13 @@ export default function GameOverScene({ mainMenu }) {
         restartLevel()
       }
     },
-    { label: 'Menú Principal', action: () => navigate(menuRoute) }
+    {
+      label: 'Menú Principal',
+      action: () => {
+        restartLevel()
+        navigate(menuRoute)
+      }
+    }
   ]
 
   const handleSelect = (index) => {
